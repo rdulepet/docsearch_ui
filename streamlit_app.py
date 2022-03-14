@@ -13,7 +13,7 @@ def get_adult_search_term_mapping():
         out_search_space = pickle.load(handle)
         return out_search_space
 
-    @st.cache
+@st.cache
 def get_child_search_term_mapping():
     with open('who_child_search_terms_mapping.pkl', 'rb') as handle:
         out_search_space = pickle.load(handle)
