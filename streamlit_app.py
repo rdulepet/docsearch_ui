@@ -26,6 +26,9 @@ def get_search_term_mapping():
         return out_search_space
 
 st.title('Specialist Doctor Search')
+#ageColNone, ageColChild, ageColAdult = st.columns(3)
+# hack to layout radio buttons horizontal instead of default vertical
+st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 age = st.radio(
      "Do you want to filter by age?",
@@ -40,8 +43,8 @@ else:
 
 #search_terms = []
 search_term = st.selectbox(
-    "Select search terms", list(search_space.keys())
-)
+    label="Select search terms", options=list(search_space.keys()))
+
 
 addln_suggestions = []
 #for term in search_terms:
