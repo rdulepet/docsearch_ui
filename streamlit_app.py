@@ -7,6 +7,17 @@ import os
 import pickle
 import streamlit as st
 
+@st.cache
+def get_adult_search_term_mapping():
+    with open('who_adult_search_terms_mapping.pkl', 'rb') as handle:
+        out_search_space = pickle.load(handle)
+        return out_search_space
+
+    @st.cache
+def get_child_search_term_mapping():
+    with open('who_child_search_terms_mapping.pkl', 'rb') as handle:
+        out_search_space = pickle.load(handle)
+        return out_search_space
 
 @st.cache
 def get_search_term_mapping():
@@ -15,7 +26,18 @@ def get_search_term_mapping():
         return out_search_space
 
 st.title('Specialist Doctor Search')
-search_space = get_search_term_mapping()
+
+age = st.radio(
+     "Do you want to filter by age?",
+     ('None', 'Adult', 'Child'))
+
+if age == 'None':
+    search_space = get_search_term_mapping()
+elif age == 'Adult':
+    search_space = get_adult_search_term_mapping()
+else:
+    search_space = get_child_search_term_mapping()
+
 #search_terms = []
 search_term = st.selectbox(
     "Select search terms", list(search_space.keys())
